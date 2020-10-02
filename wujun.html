@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>戴脱无菌手套</title>
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <!--  jquery.ui.touch-punch的本地资源引用-->
+    <script src="js/jquery.ui.touch-punch.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- <ul>
+        <li id="draggable" class="ui-state-highlight">请拖拽我</li>
+    </ul> -->
+    <h2>戴脱无菌手套</h2>
+    <h5>--请拖动图片进行排序</h5>
+    
+    <div class="container">
+        <div class="row demo">
+            <ul id="sortable">
+                <li id="l0" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img1.png"></li>
+                <li id="l1" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img2.png"></li>
+                <li id="l2" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img3.png"></li>
+                <li id="l3" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img4.png"></li>
+                <li id="l4" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img5.png"></li>
+                <li id="l5" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img6.png"></li>
+                <li id="l6" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img7.png"></li>
+                <li id="l7" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t2/img8.png"></li>
+                <!-- <li class="ui-state-default col-xs-6 col-sm-3 col-md-3"><img src="images/wall1.jpg"></li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="box2">
+        <a class='sort' onclick="randomGetString()">打乱顺序</a>
+        <a class='confirm'>确&nbsp;&nbsp;&nbsp;&nbsp;定</a>
+        <span class="toElse">
+            <a href="fanghu.html">脱防护服</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="intex.html">穿隔离衣</a>
+        </span>
+    </div>
+    <audio src="mp3/right.mp3" id="rigth" controls="controls"  hidden="true"></audio>
+    <audio src="mp3/error.mp3" id="error" controls="controls"  hidden="true"></audio>
+</body>
+
+</html>
+<script src="js/sweetalert.min.js"></script>
+<script>
+    $(function () {
+        $("#sortable").sortable({
+            revert: true
+        });
+        $("#draggable").draggable({
+            connectToSortable: "#sortable",
+            helper: "clone",
+            revert: "invalid"
+        });
+        $("ul, li").disableSelection();
+        $('.confirm').click(function () {
+                //获取li的id
+                lis = $("li");
+                var flag = true;
+                for (var i = 0; i < lis.length; i++) {
+                    id = lis[i]
+                    idv = id.getAttribute("id").substring(1)
+                    if (i != idv) {
+                        flag = false;
+                        break;
+                    }
+
+                }
+                if (flag) {
+                    swal(
+                        '回答正确',
+                        '',
+                        'success'
+                    )
+                    var a =  document.getElementById('rigth');
+                    a.play();
+                } else {
+                    swal(
+                        '回答错误',
+                        '',
+                        'error'
+                    )
+                    var a =  document.getElementById('error');
+                    a.play();
+                }
+
+            });
+    });
+    function randomGetString() {
+        var arr = $(".container  ul").children().toArray();
+        var tempArr = [].concat(arr);// 创建操作数组
+        var bigLength = arr.length;// 获取其最大长度
+        var randomString = "";// 结果字符串
+        for (var i = 0; i < bigLength; i++) {// 遍历所有数组元素内容
+            // 随机生成剩余量
+            var rand = parseInt(Math.random() * (tempArr.length));
+
+            // 将包含自身li的html内容添加到字符串中
+            randomString += tempArr[rand].outerHTML;
+            tempArr.splice(rand, 1);// 删除当前操作的数组元素
+        }
+
+        $("ul").empty();// 清空原有ul下的li标签
+        // alert(randomString)
+        $("#sortable").append(randomString);// 追加html
+    }
+    var touchValue = { x: 5, y: 5, sx: 0, sy: 0, ex: 0, ey: 0 }; //initialize the touch values
+    window.addEventListener("touchstart", function () {
+        console.log("touchstart")
+        var event = event || window.event;
+        touchValue.sx = event.targetTouches[0].pageX;
+        touchValue.sy = event.targetTouches[0].pageY;
+        touchValue.ex = touchValue.sx;
+        touchValue.ey = touchValue.sy;
+    });
+    window.addEventListener("touchmove", function (event) {
+        var event = event || window.event;
+        event.preventDefault();
+        touchValue.ex = event.targetTouches[0].pageX;
+        touchValue.ey = event.targetTouches[0].pageY;
+        console.log("touchmove")
+    });
+    window.addEventListener("touchend", function (event) {
+        var event = event || window.event;
+        var changeX = touchValue.ex - touchValue.sx;
+        var changeY = touchValue.ey - touchValue.sy;
+        //console.log("X:"+changeX+" Y:"+changeY);
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+        console.log("touchend")
+    });
+
+</script>

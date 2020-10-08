@@ -59,6 +59,7 @@
 <script src="js/sweetalert.min.js"></script>
 <script>
     $(function () {
+        randomGetString();
         $("#sortable").sortable({
             revert: true
         });
@@ -104,6 +105,7 @@
             });
     });
     function randomGetString() {
+
         var arr = $(".container  ul").children().toArray();
         var tempArr = [].concat(arr);// 创建操作数组
         var bigLength = arr.length;// 获取其最大长度

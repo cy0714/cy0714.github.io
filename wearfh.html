@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>穿隔离衣</title>
+    <title>穿防护服</title>
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
@@ -11,6 +11,7 @@
     <script src="js/jquery.ui.touch-punch.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+   
 
 </head>
 
@@ -19,42 +20,44 @@
     <!-- <ul>
         <li id="draggable" class="ui-state-highlight">请拖拽我</li>
     </ul> -->
-    <h2>穿&nbsp;隔&nbsp;离&nbsp;衣</h2>
+    <h2>穿&nbsp;防&nbsp;护&nbsp;服</h2>
     <h5>--请拖动图片进行排序</h5>
- 
-
+    
     <div class="container">
         <div class="row demo">
             <ul id="sortable">
-                <li id="l0" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t1/img1.jpg"></li>
-                <li id="l1" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t1/img2.jpg"></li>
-                <li id="l2" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t1/img3.jpg"></li>
-                <li id="l3" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t1/img4.jpg"></li>
-                <li id="l4" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t1/img5.jpg"></li>
+                <li id="l0" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img1.png"></li>
+                <li id="l1" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img2.png"></li>
+                <li id="l2" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img3.png"></li>
+                <li id="l3" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img4.png"></li>
+                <li id="l4" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img5.png"></li>
+                <li id="l5" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img6.png"></li>
+                <li id="l6" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img7.png"></li>
+                <li id="l7" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img8.png"></li>
+                <li id="l8" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img9.png"></li>
+                <li id="l9" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img10.png"></li>
+                <li id="l10" class="col-xs-6 col-sm-3 col-md-3"><img src="images/t4/img11.png"></li>
             </ul>
-            
         </div>
-
     </div>
     <div class="box2">
         <a class='sort' onclick="randomGetString()">打乱顺序</a>
         <a class='confirm'>确&nbsp;&nbsp;&nbsp;&nbsp;定</a>
         <span class="toElse">
-            <a  href="wujun.html">戴脱无菌手套</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a  href="wearfh.html">穿防护服</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a  href="fanghu.html">脱防护服</a>
+        	<a href="fanghu.html">脱防护服</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="index.html">穿隔离衣</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="wujun.html">戴脱无菌手套</a>
         </span>
     </div>
     <audio src="mp3/right.mp3" id="rigth" controls="controls"  hidden="true"></audio>
     <audio src="mp3/error.mp3" id="error" controls="controls"  hidden="true"></audio>
-
 </body>
 
 </html>
 <script src="js/sweetalert.min.js"></script>
 <script>
     $(function () {
-         randomGetString();
+        randomGetString();
         $("#sortable").sortable({
             revert: true
         });
@@ -65,39 +68,42 @@
         });
         $("ul, li").disableSelection();
         $('.confirm').click(function () {
-            //获取li的id
-            lis = $("li");
-            var flag = true;
-            for (var i = 0; i < lis.length; i++) {
-                id = lis[i]
-                idv = id.getAttribute("id").substring(1)
-                if (i != idv) {
-                    flag = false;
-                    break;
+                //获取li的id
+                lis = $("li");
+                var flag = true;
+                for (var i = 0; i < lis.length; i++) {
+                    id = lis[i]
+                    idv = id.getAttribute("id").substring(1)
+                    if (i != idv) {
+                        flag = false;
+                        break;
+                    }
+
+                }
+                if (flag) {
+
+                    swal(
+                        '回答正确',
+                        '',
+                        'success'
+                    )
+                    var a =  document.getElementById('rigth');
+                    a.play();
+                   
+                } else {
+                    swal(
+                        '回答错误',
+                        '',
+                        'error'
+                    )
+                    var a =  document.getElementById('error');
+                    a.play();
                 }
 
-            }
-            if (flag) {
-                swal(
-                    '回答正确',
-                    '',
-                    'success'
-                )
-                var a =  document.getElementById('rigth');
-                a.play();
-            } else {
-                swal(
-                    '回答错误',
-                    '',
-                    'error'
-                )
-                var a =  document.getElementById('error');
-                a.play();
-            }
-
-        });
+            });
     });
     function randomGetString() {
+
         var arr = $(".container  ul").children().toArray();
         var tempArr = [].concat(arr);// 创建操作数组
         var bigLength = arr.length;// 获取其最大长度

@@ -16,16 +16,16 @@ ul {
 .demo li {
     margin: 5px;
     padding: 15px;
-    width: 200px;
-    height: 150px;
+    width: 220px;
+    height: 160px;
     list-style-type: none;
     
 
 }
 
 img {
-    width: 200px;
-    height: 150px;
+    width: 220px;
+    height: 160px;
     border:1px solid #ccc;
     padding:5px;
     
@@ -33,7 +33,7 @@ img {
 
 .box2 {
     width: 860px;
-    margin: 30px auto;
+    margin: 50px auto;
     text-align: center;
 }
 .box2 a:hover{
@@ -41,8 +41,8 @@ img {
     color:red;
 }
 .box2>a {
-    font-size: 16px;
-    padding: 5px 30px;
+    font-size: 20px;
+    padding: 15px 30px;
     background-color: #eee;
     border: 1px solid #ccc;
     margin: 0 15px;
@@ -50,7 +50,8 @@ img {
 }
 
 .toElse {
-    margin-top: 30px;
+	font-size: 20px;
+    margin-top: 50px;
     margin-left: 30px;
     
 }
